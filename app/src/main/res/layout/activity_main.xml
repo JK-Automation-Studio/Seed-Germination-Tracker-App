@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_dark"
+    android:gravity="center|center_horizontal|center_vertical"
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="400sp"
+        android:layout_height="400sp"
+        android:foregroundGravity="center"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="300sp"
+        app:cardElevation="0sp">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/cannakanChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="8sp"
+            android:elevation="1sp"
+            android:foregroundGravity="center_vertical|center_horizontal" />
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

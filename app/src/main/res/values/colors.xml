@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="off_white">#FFEBEBD0</color>
+    <color name="gray">#FFA2A2A2</color>
+    <color name="gray_light">#FFB6B6B6</color>
+    <color name="gray_dark">#FF424242</color>
+    <color name="gray_dark_2">#FF242424</color>
+
+    <color name="red">#FFF60000</color>
+    <color name="orange">#FFFF8C00</color>
+    <color name="yellow">#FFFFEE00</color>
+    <color name="green">#30CC30</color>
+    <color name="blue">#FF3783FF</color>
+    <color name="purple">#FF4815AA</color>
+
+    <color name="material_primary">@color/material_dynamic_primary60</color>
+    <color name="material_primary_light">@color/material_dynamic_primary80</color>
+    <color name="material_primary_dark">@color/material_dynamic_primary40</color>
+
+    <color name="material_secondary">@color/material_dynamic_secondary60</color>
+    <color name="material_secondary_light">@color/material_dynamic_secondary80</color>
+    <color name="material_secondary_dark">@color/material_dynamic_secondary40</color>
+
+    <color name="material_neutral">@color/material_dynamic_neutral60</color>
+    <color name="material_neutral_light">@color/material_dynamic_neutral80</color>
+    <color name="material_neutral_dark">@color/material_dynamic_neutral40</color>
+</resources>
