@@ -25,9 +25,11 @@
         app:titleTextColor="@color/white"/>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="400sp"
-        android:layout_height="400sp"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_marginLeft="12sp"
         android:layout_marginTop="124sp"
+        android:layout_marginRight="12sp"
         android:foregroundGravity="center_vertical|center"
         app:cardBackgroundColor="@color/green"
         app:cardCornerRadius="300sp"
