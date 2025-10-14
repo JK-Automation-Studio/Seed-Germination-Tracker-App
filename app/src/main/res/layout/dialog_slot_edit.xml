@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp"
+    app:cardBackgroundColor="#00A2A2A2"
+    app:cardCornerRadius="15sp"
+    app:cardElevation="0sp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/gradient_border" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/dialogBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2sp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="13sp"
+        app:cardElevation="0sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editPlantName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16sp"
+            android:layout_marginTop="4sp"
+            android:layout_marginBottom="16sp"
+            android:hint="Enter plant variety"
+            android:inputType="textCapWords"
+            android:selectAllOnFocus="true" />
+
+        <RadioGroup
+            android:id="@+id/colorGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16sp"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/linearButtonsBottomDialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16sp"
+            android:layout_marginRight="16sp"
+            android:layout_marginBottom="16sp"
+            android:gravity="bottom|right|center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonCancelDialog"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="100sp"
+                android:layout_height="55sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="12sp"
+                android:backgroundTint="#00FFFFFF"
+                android:gravity="center_vertical"
+                android:insetLeft="0sp"
+                android:insetTop="0sp"
+                android:insetRight="0sp"
+                android:insetBottom="0sp"
+                android:shadowColor="@color/black"
+                android:shadowDx="4"
+                android:shadowDy="2"
+                android:shadowRadius="1"
+                android:text="Cancel"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:strokeColor="@color/gray_light"
+                app:strokeWidth="2sp" />
+
+            <Button
+                android:id="@+id/buttonAddDialog"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="100sp"
+                android:layout_height="55sp"
+                android:layout_gravity="center_vertical"
+                android:backgroundTint="@color/green"
+                android:gravity="center_vertical"
+                android:insetLeft="0sp"
+                android:insetTop="0sp"
+                android:insetRight="0sp"
+                android:insetBottom="0sp"
+                android:shadowColor="@color/black"
+                android:shadowDx="4"
+                android:shadowDy="2"
+                android:shadowRadius="1"
+                android:text="Confirm"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
