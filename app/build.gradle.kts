@@ -38,6 +38,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.cardview)
+    implementation(libs.coordinatorlayout)
     testImplementation(libs.junit)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     androidTestImplementation(libs.ext.junit)
