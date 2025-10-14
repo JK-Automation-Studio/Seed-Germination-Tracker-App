@@ -141,14 +141,16 @@ public class MainActivity extends AppCompatActivity {
         //get chart spinner
         chart = findViewById(R.id.germSlotsChart);
         // Default entry listings
-        //entries = new ArrayList<>();
-        //entries.add(new PieEntry(1, "Slot 1"));
-        //entries.add(new PieEntry(1, "Slot 2"));
-        //entries.add(new PieEntry(1, "Slot 3"));
-        //entries.add(new PieEntry(1, "Slot 4"));
-        //entries.add(new PieEntry(1, "Slot 5"));
-        //entries.add(new PieEntry(1, "Slot 6"));
 
+        if (entries.isEmpty()) {
+            entries = new ArrayList<>();
+            entries.add(new PieEntry(1, "Slot 1"));
+            entries.add(new PieEntry(1, "Slot 2"));
+            entries.add(new PieEntry(1, "Slot 3"));
+            entries.add(new PieEntry(1, "Slot 4"));
+            entries.add(new PieEntry(1, "Slot 5"));
+            entries.add(new PieEntry(1, "Slot 6"));
+        }
         // set default grays
         colors.add(ContextCompat.getColor(this, R.color.gray_dark));
         colors.add(ContextCompat.getColor(this, R.color.gray_dark));
@@ -167,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
         //create dataset with colors, slice spacing, etc
         dataSet = new PieDataSet(entries, "Cannakan Slots"); // new dataset with values, label
         dataSet.setColors(colors); // set colors of dataset to colors ArrayList
+        dataSet.setValues(entries);
         dataSet.setSliceSpace(8f); // adds space between slices
         dataSet.setSelectionShift(2f); // adds distance for highlighted selection
 
