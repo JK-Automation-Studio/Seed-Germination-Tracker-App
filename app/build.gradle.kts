@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.jkstudio.germinationtrackerapp"
+    namespace = "com.jkstudio.seedstarterapp"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.jkstudio.germinationtrackerapp"
+        applicationId = "com.jkstudio.seedstarterapp"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

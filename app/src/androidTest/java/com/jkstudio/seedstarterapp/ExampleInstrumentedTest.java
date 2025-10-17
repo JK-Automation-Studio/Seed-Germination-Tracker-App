@@ -1,4 +1,4 @@
-package com.jkstudio.germinationtrackerapp;
+package com.jkstudio.seedstarterapp;
 
 import android.content.Context;
 

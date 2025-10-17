@@ -102,7 +102,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="0sp"
                     android:foregroundGravity="center"
-                    android:tint="@color/app_theme_green"
+                    android:tint="@color/green"
                     android:tintMode="multiply"
                     app:srcCompat="@drawable/gradient_border" />
             </androidx.cardview.widget.CardView>
@@ -113,7 +113,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10sp"
                 android:foregroundGravity="center_vertical|center"
-                app:cardBackgroundColor="@color/app_theme_green"
+                app:cardBackgroundColor="@color/green"
                 app:cardCornerRadius="300sp"
                 app:cardElevation="0sp">
 

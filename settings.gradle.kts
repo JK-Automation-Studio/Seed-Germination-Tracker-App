@@ -20,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Germination Tracker App"
+rootProject.name = "Seed Starter App"
 include(":app")
  
