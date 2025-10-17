@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         createChartUI();
         readFromFile();
 
-        chart.invalidate(); // redraw chart
+        //chart.invalidate(); // redraw chart
 
 
 
@@ -134,10 +134,15 @@ public class MainActivity extends AppCompatActivity {
         writeToFile();
     }
     private void createChartUI() {
+        // set default entries in arraylist if empty,
+        // create dataset from entries + colors arraylists
+        // set chart data to dataset
+        // set chart formatting
+
         //get chart spinner
         chart = findViewById(R.id.germSlotsChart);
-        // Default entry listings
 
+        // Default entry listings
         if (entries.isEmpty()) {
             entries = new ArrayList<>();
             entries.add(new PieEntry(1, "Slot 1"));
@@ -156,46 +161,43 @@ public class MainActivity extends AppCompatActivity {
         colors.add(ContextCompat.getColor(this, R.color.gray_dark));
 
 
-        // TODO Replace with readFromFile();
-        // temporary default first item
-        //entries.get(0).setLabel("Blue Gelato #4"); // set first label to Blue Gelato
-        //colors.set(0,ContextCompat.getColor(this, R.color.blue)); // set first color to blue
-
-
-        //create dataset with colors, slice spacing, etc
+        //create dataset with slot entries, colors, slice spacing, etc
         dataSet = new PieDataSet(entries, "Cannakan Slots"); // new dataset with values, label
-        dataSet.setColors(colors); // set colors of dataset to colors ArrayList
-        dataSet.setValues(entries);
+        dataSet.setColors(colors); // set chart dataset colors to colors ArrayList
+        dataSet.setValues(entries); // set chart value set to entries
         dataSet.setSliceSpace(8f); // adds space between slices
         dataSet.setSelectionShift(2f); // adds distance for highlighted selection
+        PieData data = new PieData(dataSet); // new data object from dataset
 
-        PieData data = new PieData(dataSet);
-
+        // set chart data
         chart.setData(data);
-        chart.setDrawEntryLabels(true); // Draw labels in chart
-        chart.setDrawRoundedSlices(true); // idk
 
+
+        // chart formatting for pretty UI
+        chart.setDrawEntryLabels(true); // show labels in chart for plant varietals
         chart.getDescription().setEnabled(false); // do not show description
         chart.getLegend().setEnabled(false); // do not show legend
-        chart.getData().setDrawValues(false); // do not show values, only labels
-
+        chart.getData().setDrawValues(false); // do not show values as "value" for each slot == 1
         chart.setDrawHoleEnabled(false); // remove center circle
         chart.setHighlightPerTapEnabled(false); // true for highlight version, false for onclick version
+
+        chart.invalidate();
     }
 
 
 
 
-    // Create toolbar with menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Create toolbar with menu
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    // Handle item clicks for toolbar menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item clicks for toolbar menu
+
         int id = item.getItemId();
 
         if (id == R.id.menuSettings) {
@@ -213,6 +215,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     private void showSlotDialog(int slotIndex) {
+        // create array of color options
+        // inflate dialog layout
+        // build alert dialog, set view to dialogview
+        // get dialog elements
+        // create radio buttons for each color, add to radioGroup element
+        // listen for confirm or cancel button clicks
+
         final String[] colorNames = {"Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Gray"};
         final int[] colorValues = {
                 getColor(R.color.red),
@@ -233,8 +242,8 @@ public class MainActivity extends AppCompatActivity {
                 .setView(dialogView)
                 .create();
 
-        // dialog.setTitle("Edit Slot " + (slotIndex + 1))
 
+        // variables for dialog elements
         EditText input = dialogView.findViewById(R.id.editPlantName);
         RadioGroup colorGroup = dialogView.findViewById(R.id.colorGroup);
 
@@ -244,16 +253,17 @@ public class MainActivity extends AppCompatActivity {
         input.setShadowLayer(2,4,2, R.color.black);
 
         // Build color options dynamically
-        int currentColor = colors.get(slotIndex); // your existing color list
+        int currentColor = colors.get(slotIndex); // color from saved list
         int checkedIndex = -1;
 
         // for each color in array, create button with correct name and shadow color, add to radioGroup
-        // if current loop through colorValues is the right one, set checkedIndex
+        // if current color's button == colors arraylist at index, set button selected
         for (int i = 0; i < colorNames.length; i++) {
             RadioButton rb = new RadioButton(this);
             rb.setText(colorNames[i]);
             rb.setShadowLayer(2, 4,2, colorValues[i]); // makes label show color visually
             rb.setTextColor(getResources().getColor(R.color.white)); // makes text color white
+            rb.setPadding(0,0,6,0); // give each button's text some extra room for shadow
             colorGroup.addView(rb); // add button to group
 
             // Check the one that matches current color
@@ -268,19 +278,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        // get buttons
+        // variables for dialog buttons
         Button btnYes = dialogView.findViewById(R.id.buttonAddDialog);
         Button btnNo = dialogView.findViewById(R.id.buttonCancelDialog);
 
+        // onclick listener for confirm button
         btnYes.setOnClickListener(view -> {
-            // on Confirm click, get input checkbox
+            // on Confirm click, get input string
             String plantName = input.getText().toString().trim();
 
             // if name is empty, set to default slot number
             if (plantName.isBlank()){
                 plantName = "Slot " + (slotIndex + 1);
             }
-            // Find which color is selected
+            // get which color is selected
             int selectedId = colorGroup.getCheckedRadioButtonId();
             int selectedColor = currentColor;
             if (selectedId != -1) {
@@ -294,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.dismiss();
         });
 
-
+        // onclick listener for cancel button
         btnNo.setOnClickListener(view -> {
             // close dialog without any actions
             dialog.dismiss();
@@ -312,32 +323,34 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateSlot(int slotIndex, String plantName, int selectedColor) {
 
-        updateSlotName(slotIndex, plantName);
-        updateSlotColor(slotIndex, selectedColor);
-        writeToFile();
-        chart.highlightValues(null);
+        updateSlotName(slotIndex, plantName); // add to entries
+        updateSlotColor(slotIndex, selectedColor); // add to colors
+        writeToFile(); // write to file
+        //chart.highlightValues(null); // un-highlight any selected
 
     }
 
     private void writeToFile() {
 
-        //TODO make file writer
+        // Create JSONObject root, store rotation angle, list of "slot" arrays each holding a plant name and color
+        // then write it to json file FILENAME
 
         try {
             // Create a JSON object
             JSONObject root = new JSONObject();
             root.put("rotation", chart.getRotationAngle());
 
+            // create plant slots array
             JSONArray slotsArray = new JSONArray();
             for (int i = 0; i < entries.size(); i++) {
                 JSONObject slot = new JSONObject();
                 slot.put("plant", entries.get(i).getLabel());
                 slot.put("color", colors.get(i));
                 slotsArray.put(slot);
-                Log.i("i", "Plant written: "+slot.getString("plant")+" "+slot.getInt("color"));
+                Log.i("i", "Plant written: "+slot.getString("plant"));
 
             }
-            root.put("slots", slotsArray);
+            root.put("slots", slotsArray); // add slots array to json object, call it "slots"
 
             // Write to internal storage
             FileOutputStream fos = openFileOutput(FILENAME, MODE_PRIVATE);
@@ -353,9 +366,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void readFromFile() {
 
-        //TODO make file reader
+        // Read string from file, create json object from string and
+        // finally set up data in app view
 
         try {
+
+            // read file using file input stream
             FileInputStream fis = openFileInput(FILENAME);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
             StringBuilder sb = new StringBuilder();
@@ -363,24 +379,26 @@ public class MainActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) sb.append(line);
             reader.close();
 
+            // create json using string builder toString()
             JSONObject root = new JSONObject(sb.toString());
 
+            // set rotation of spinner using rotation stored in root json
             float rotation = (float) root.getDouble("rotation");
             chart.setRotationAngle(rotation);
 
+            // json array for iterating
             JSONArray slots = root.getJSONArray("slots");
             entries.clear();
             colors.clear();
             for (int i = 0; i < slots.length(); i++) {
                 JSONObject slot = slots.getJSONObject(i);
 
-                entries.add(new PieEntry(1, slot.getString("plant")));
-                colors.add(slot.getInt("color"));
-                Log.i("i", "Plant read: "+slot.getString("plant")+" "+slot.getInt("color"));
+                // add items from json to arraylists
+                entries.add(new PieEntry(1, slot.getString("plant"))); // add new PieEntry object with label and arbitrary value of 1 to entries arraylist
+                colors.add(slot.getInt("color")); // add color to colors
+                Log.i("i", "Plant read: "+slot.getString("plant")); // log to logcat
 
             }
-
-            //updateChartUI(); // A method to rebuild PieData with updated values
 
             createChartUI();
 
